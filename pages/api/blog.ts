@@ -18,13 +18,13 @@ export default async function handler(
     });
     const body = root.getElementsByTagName("body")[0];
     // body.set_content(body.innerHTML);
-    body.insertAdjacentHTML(
-      "afterbegin",
-      root.getElementsByTagName("style")[0].toString()
-    );
-    blogData.ArticleBody = `<p>${body.innerHTML}</p>`;
+    // body.insertAdjacentHTML(
+    //   "afterbegin",
+    //   root.getElementsByTagName("style")[0].toString()
+    // );
+    blogData.ArticleBody = `${body.innerHTML}`;
 
-    return res.status(200).json({ result: blogData.ArticleBody });
+    return res.status(200).send({ result: blogData.ArticleBody });
   } catch (error: any) {
     console.log(error);
     res.status(400).send(error);
