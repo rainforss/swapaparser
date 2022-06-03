@@ -17,12 +17,11 @@ export default async function handler(
       blockTextElements: { script: true, style: true, pre: false },
     });
     const body = root.getElementsByTagName("body")[0];
-    // body.set_content(body.innerHTML);
-    // body.insertAdjacentHTML(
-    //   "afterbegin",
-    //   root.getElementsByTagName("style")[0].toString()
-    // );
-    blogData.ArticleBody = `${body.innerHTML}`;
+    body.set_content(body.innerHTML);
+    body.removeChild(body.lastChild);
+    blogData.ArticleBody = `${root
+      .getElementsByTagName("style")[0]
+      .toString()}${body.innerHTML}`;
 
     return res.status(200).send({ result: blogData.ArticleBody });
   } catch (error: any) {
