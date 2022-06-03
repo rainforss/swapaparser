@@ -12,6 +12,7 @@ export default async function handler(
 ) {
   try {
     const blogData = req.body;
+    console.log(blogData);
     const emailBody = blogData.ArticleBody;
     const root = parse(emailBody, {
       blockTextElements: { script: true, style: true, pre: false },
