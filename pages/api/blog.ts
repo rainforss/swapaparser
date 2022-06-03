@@ -12,7 +12,6 @@ export default async function handler(
 ) {
   try {
     const blogData = req.body;
-    console.log(blogData);
     const emailBody = blogData.ArticleBody;
     const root = parse(emailBody, {
       blockTextElements: { script: true, style: true, pre: false },
@@ -23,7 +22,7 @@ export default async function handler(
       "afterbegin",
       root.getElementsByTagName("style")[0].toString()
     );
-    blogData.ArticleBody = body.innerHTML;
+    blogData.ArticleBody = `<p>${body.innerHTML}</p>`;
 
     return res.status(200).json({ result: blogData.ArticleBody });
   } catch (error: any) {
