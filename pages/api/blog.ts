@@ -23,7 +23,6 @@ export default async function handler(
     //   root.getElementsByTagName("style")[0].toString()
     // );
     blogData.ArticleBody = `${body.innerHTML}`;
-    blogData.ArticleBody = encodeURIComponent(blogData.ArticleBody);
 
     return res.status(200).send({ result: blogData.ArticleBody });
   } catch (error: any) {
