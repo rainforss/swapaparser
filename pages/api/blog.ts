@@ -17,11 +17,15 @@ export default async function handler(
       blockTextElements: { script: true, style: true, pre: false },
     });
     const body = root.getElementsByTagName("body")[0];
-    body.set_content(body.innerHTML);
-    body.removeChild(body.lastChild);
+    const rootdiv: any = body.querySelector("div");
+    const sections = body.querySelectorAll(
+      "div[data-layout='true'] > div[data-section='true']"
+    );
+    const filteredSections = sections.slice(0, -1);
+    rootdiv.innerHTML = filteredSections.join("");
     blogData.ArticleBody = `${root
       .getElementsByTagName("style")[0]
-      .toString()}${body.innerHTML}`;
+      .toString()}${rootdiv.toString()}`;
 
     return res.status(200).send({ result: blogData.ArticleBody });
   } catch (error: any) {
